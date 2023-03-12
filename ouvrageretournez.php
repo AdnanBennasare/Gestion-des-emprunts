@@ -94,19 +94,35 @@ require_once 'oopConnection.php';
 
 $db = new Database("localhost", "root", "", "books");
 $conn = $db->getConnection();
-
 $date_retour = '0000-00-00';
 
 
+if (isset($_GET['search'])) {
 
-$stmt2 = $conn->prepare("SELECT *
-FROM emprunt e
-JOIN adherent a ON e.code_adherent = a.code_adherent
-JOIN ouvrage o ON e.code_ouvrage = o.code_ouvrage
-WHERE e.date_retour  = '0000-00-00'");
-$stmt2->execute();
+  $client_name = '%' . $_GET['search'] . '%';
 
-$rows = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+  $stmt5 = $conn->prepare("SELECT *FROM emprunt e
+  JOIN adherent a ON e.code_adherent = a.code_adherent
+  JOIN ouvrage o ON e.code_ouvrage = o.code_ouvrage
+  WHERE e.date_retour = '0000-00-00' AND nickname LIKE :nickname");
+
+$stmt5->bindParam(':nickname', $client_name);
+$stmt5->execute();
+$rows = $stmt5->fetchAll(PDO::FETCH_ASSOC);
+
+} else {
+
+  $stmt2 = $conn->prepare("SELECT *
+  FROM emprunt e
+  JOIN adherent a ON e.code_adherent = a.code_adherent
+  JOIN ouvrage o ON e.code_ouvrage = o.code_ouvrage
+  WHERE e.date_retour  = '0000-00-00'");
+  $stmt2->execute();
+  $rows = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
 ?>
 
 <div class="container">

@@ -92,13 +92,35 @@ $db = new Database("localhost", "root", "", "books");
 $conn = $db->getConnection();
 
 
-$stmt2 = $conn->prepare("SELECT *
-FROM reservation r
-JOIN adherent a ON r.code_adherent = a.code_adherent
-JOIN ouvrage o ON r.code_ouvrage = o.code_ouvrage
-WHERE o.ouvrage_state = 'reserved'");
-$stmt2->execute();
-$rows = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+if (isset($_GET['search'])) {
+
+  $client_name = '%' . $_GET['search'] . '%';
+
+  $stmt5 = $conn->prepare("SELECT *
+  FROM reservation r
+  JOIN adherent a ON r.code_adherent = a.code_adherent
+  JOIN ouvrage o ON r.code_ouvrage = o.code_ouvrage
+  WHERE o.ouvrage_state = 'reserved' AND nickname LIKE :nickname");
+
+$stmt5->bindParam(':nickname', $client_name);
+$stmt5->execute();
+$rows = $stmt5->fetchAll(PDO::FETCH_ASSOC);
+
+} else {
+  
+  $stmt2 = $conn->prepare("SELECT *
+  FROM reservation r
+  JOIN adherent a ON r.code_adherent = a.code_adherent
+  JOIN ouvrage o ON r.code_ouvrage = o.code_ouvrage
+  WHERE o.ouvrage_state = 'reserved'");
+  $stmt2->execute();
+  $rows = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+  
+
+}
+
+
+// ===================---------- DELETE RESRVATION IF IT PASSED DATE EXPIRATION
 
 foreach ($rows as $row) { 
 
@@ -133,11 +155,26 @@ if ($current_date > $date_expiration) {
 
 <div class="container">
 <h1>Les reservation</h1>
-
 <div class="container d-flex flex-wrap wrap gap-5 mt-5">
 
+
+
+
+
+
+
+
+
+
+
 <?php 
+
 foreach ($rows as $row) { 
+
+
+
+
+
 
     ?>
 

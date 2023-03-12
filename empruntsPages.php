@@ -63,14 +63,34 @@ require_once 'oopConnection.php';
 $db = new Database("localhost", "root", "", "books");
 $conn = $db->getConnection();
 
+
+
+
+
+if (isset($_GET['search'])) {
+
+  $emprunt_name = '%' . $_GET['search'] . '%';
+  $stmt5 = $conn->prepare("SELECT *
+  FROM reservation r
+  JOIN adherent a ON r.code_adherent = a.code_adherent
+  JOIN ouvrage o ON r.code_ouvrage = o.code_ouvrage
+  WHERE o.ouvrage_state = 'empruntez' AND o.titre LIKE :titre");
+
+$stmt5->bindParam(':titre', $emprunt_name);
+$stmt5->execute();
+$rows = $stmt5->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
 $stmt2 = $conn->prepare("SELECT *
 FROM emprunt e
 JOIN adherent a ON e.code_adherent = a.code_adherent
 JOIN ouvrage o ON e.code_ouvrage = o.code_ouvrage
 WHERE o.ouvrage_state = 'empruntez'");
 $stmt2->execute();
-
 $rows = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 ?>
 

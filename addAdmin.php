@@ -80,6 +80,7 @@ require_once 'oopConnection.php';
 $db = new Database("localhost", "root", "", "books");
 $conn = $db->getConnection();
 
+
 if (isset($_GET['search'])) {
 
 $client_name = '%' . $_GET['search'] . '%';

@@ -326,13 +326,10 @@ if (isset($_GET['category'])) {
     <p><strong>Le nombre des pages</strong> <?php echo $row['num_pages']; ?> P</p>
 
    
-    <div class="d-flex mb-3 gap-4">
-          <a href="" class="btn btn-info mr-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>    
-          <div>
+          <div style="margin-left: 9rem; margin-bottom: 1rem;">
             <input type="hidden" class="delete_id_value" value="<?php echo $row['code_ouvrage'];  ?>">
             <a class="confirm_the_delete btn btn-danger ml-2">DELETE</a>
           </div>
-    </div>
 
   </div>
 </div>
@@ -344,123 +341,6 @@ if (isset($_GET['category'])) {
   <?php } ?>
 
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="exampleModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="myLargeModalLabel">Large Modal</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal content goes here.</p>
-
-
-
-
-   <form action="additem.php" method="POST" enctype="multipart/form-data" class="mx-auto">
-  <h3 class="text-center mb-4">Ajouter une ouvrage sur la médiathèque mantenan !</h3>
-  <div class="row mb-4">
-
-    <div class="col-md-8 mb-3 mb-md-0">
-      <input type="file" class="form-control" placeholder="Place an image" name="my_image">
-    </div>
-    <div class="col-md-4">
-      <input type="text" class="form-control" placeholder="Titre" name="title">
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <div class="col-md-6 mb-3 mb-md-0">
-      <input type="text" class="form-control" placeholder="Le nom d'auteur" name="auteurname">
-    </div>
-    <div class="col-md-6">
-      <select class="form-control" name="type">
-        <option value="">-- choisir une type --</option>
-        <option value="Livres">Livres</option>
-        <option value="des revues">des revues</option>
-        <option value="des romans">des romans</option>
-        <option value=" des cassettes vidéo"> des cassettes vidéo</option>
-        <option value="CDs">CDs</option>
-        <option value="DVDs">DVDs</option>
-        <option value="magazine">magazine</option>
-        <option value="mémoire de recherche">mémoire de recherche</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <div class="col-md-6 mb-3 mb-md-0">
-      <input type="number" placeholder="Le nombre des pages" class="form-control mt-4" name="pages">
-    </div>
-    <div class="col-md-4">
-      <label for="">Edition date</label>
-      <input type="date" placeholder="La date d'edition" class="form-control" name="editiondate">
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <div class="col-md-6 mb-3 mb-md-0">
-    <label for="">purshase date</label>
-      <input type="date" placeholder="La date d'achat" class="form-control" name="purshasedate">
-    </div>
-    <div class="col-md-6">
-      <select class="form-control mt-4" name="state">
-        <option value="">-- L'etat d'ouvrage --</option>
-        <option value="Neuf">Neuf</option>
-        <option value="Bon état">Bon état</option>
-        <option value="Acceptable">Acceptable</option>
-        <option value="Assez usé">Assez usé</option>
-        <option value="Déchiré">Déchiré</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="row my-4">
-    <div class="col-md-6 mb-3 mb-md-0">
-      <p>duplicate this item as many as you wish</p>
-    </div>
-    <div class="col-md-6">
-      <input type="number" placeholder="* Times" class="form-control">
-    </div>
-
-</form>
-
-
-
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
 
 
 
